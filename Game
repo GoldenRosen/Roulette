@@ -12,36 +12,36 @@ func main() {
 	var BallPos int32
 	var balance int32 = 1000
 	var rb int32
-Start:
-	fmt.Println("your balance is", balance, "please enter your bet.")
-	fmt.Scanln(&bet)
-	if bet >= 0 && bet <= balance {
-		fmt.Println("you have bet", bet, "dollars, please select a number 0-36, or red(37)/black(38)")
-	} else {
-		goto Start
-	}
-	fmt.Scanln(&position)
-	if position >= 0 && position <= 38 {
-		BallPos = int32(rand.Intn(37))
-	}
+	for {
+		fmt.Println("your balance is", balance, "please enter your bet.")
+		fmt.Scanln(&bet)
+		if bet >= 0 && bet <= balance {
+			fmt.Println("you have bet", bet, "dollars, please select a number 0-36, or red(37)/black(38)")
+		} else {
+			continue
+		}
+		fmt.Scanln(&position)
+		if position >= 0 && position <= 38 {
+			BallPos = int32(rand.Intn(37))
+		}
 
-	// Determine the color (red/black/green) for the ball
-	if BallPos == 0 {
-		rb = 0 // nor
-	} else if BallPos == 1 || BallPos == 3 || BallPos == 5 || BallPos == 7 || BallPos == 9 || BallPos == 12 || BallPos == 14 || BallPos == 16 || BallPos == 18 || BallPos == 19 || BallPos == 21 || BallPos == 23 || BallPos == 25 || BallPos == 27 || BallPos == 30 || BallPos == 32 || BallPos == 34 || BallPos == 36 {
-		rb = 37 // red
-	} else {
-		rb = 38 // black
-	}
+		// Determine the color (red/black/green) for the ball
+		if BallPos == 0 {
+			rb = 0 // nor
+		} else if BallPos == 1 || BallPos == 3 || BallPos == 5 || BallPos == 7 || BallPos == 9 || BallPos == 12 || BallPos == 14 || BallPos == 16 || BallPos == 18 || BallPos == 19 || BallPos == 21 || BallPos == 23 || BallPos == 25 || BallPos == 27 || BallPos == 30 || BallPos == 32 || BallPos == 34 || BallPos == 36 {
+			rb = 37 // red
+		} else {
+			rb = 38 // black
+		}
 
-	if position == BallPos {
-		balance += bet * 35
-	} else if position == rb {
-		balance += bet
-	} else {
-		balance -= bet
+		if position == BallPos {
+			balance += bet * 35
+		} else if position == rb {
+			balance += bet
+		} else {
+			balance -= bet
+		}
+		fmt.Println("The ball landed on tile", BallPos)
+		fmt.Println("=+=+=+=+=")
 	}
-	fmt.Println("The ball landed on tile", BallPos)
-	fmt.Println("=+=+=+=+=")
-	goto Start
 }
